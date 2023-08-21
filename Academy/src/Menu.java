@@ -34,8 +34,9 @@ public class Menu extends javax.swing.JFrame {
         definitiva = new javax.swing.JLabel();
         limpiar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel7 = new javax.swing.JLabel();
+        textoned = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(java.awt.SystemColor.activeCaption);
@@ -113,13 +114,19 @@ public class Menu extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(0, 255, 153));
         jSeparator1.setToolTipText("");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Nota Final");
+        textoned.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        textoned.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jSeparator2.setBackground(new java.awt.Color(51, 255, 204));
         jSeparator2.setForeground(new java.awt.Color(0, 255, 153));
         jSeparator2.setToolTipText("");
+
+        jButton1.setText("Need");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,10 +173,12 @@ public class Menu extends javax.swing.JFrame {
                                         .addComponent(calculartreinta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(113, 113, 113)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(textoned, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(147, 147, 147)
-                        .addComponent(definitiva, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(definitiva, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -202,12 +211,14 @@ public class Menu extends javax.swing.JFrame {
                     .addComponent(treinta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(calculartreinta)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
+                .addComponent(textoned)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(definitiva, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(definitiva, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(limpiar)
                 .addGap(8, 8, 8))
@@ -234,7 +245,7 @@ public class Menu extends javax.swing.JFrame {
             } while(numero<0 || numero>5);
             sumatoria+= numero;
         }
-        float resultado = sumatoria/dato;
+        double resultado = Math.round((sumatoria/dato)*100)/100d;
         
         n3.setText(
                 String.valueOf(resultado)
@@ -265,9 +276,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_setentaActionPerformed
 
     private void calculartreintaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculartreintaActionPerformed
-        
-        
-        
+
+        textoned.setText("Nota Final");
         float num = 0;
         do {
             if (num<0 || num>5) {
@@ -300,7 +310,24 @@ public class Menu extends javax.swing.JFrame {
         setenta.setText("");
         treinta.setText("");
         definitiva.setText("Esperando...");
+        textoned.setText("");
     }//GEN-LAST:event_limpiarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        float data = Float.parseFloat(setenta.getText());
+        float restante = (3-data);
+        double need = Math.round((restante/0.3)*100)/100d;
+        textoned.setText("Nececita Sacar En El Examen Final");
+        
+        if (restante<=0) {
+            definitiva.setText("0.0");
+        } else if (restante>0 && restante<5) {
+            definitiva.setText(String.valueOf(need));
+        } else if (need>5) {
+            definitiva.setText(String.valueOf(need));
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,13 +369,13 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton calcularsetenta;
     private javax.swing.JButton calculartreinta;
     private javax.swing.JLabel definitiva;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton limpiar;
@@ -356,6 +383,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JTextField p1;
     private javax.swing.JTextField p2;
     private javax.swing.JTextField setenta;
+    private javax.swing.JLabel textoned;
     private javax.swing.JTextField treinta;
     // End of variables declaration//GEN-END:variables
 }
